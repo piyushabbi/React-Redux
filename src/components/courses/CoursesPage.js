@@ -32,10 +32,6 @@ class CoursesPage extends Component {
     this.props.actions.createCourse(this.state.course);
   }
 
-  displayAddedCourses (course, i) {
-
-  }
-
   render () {
     let addedCourses = this.props.courses.map( (m,i) => {
       return <li key={i}>{m.title}</li>;
