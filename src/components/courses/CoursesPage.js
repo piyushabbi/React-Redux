@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
+import * as courseActions from '../../actions/courseActions';
 
 class CoursesPage extends Component {
   constructor (props) {
@@ -25,10 +28,18 @@ class CoursesPage extends Component {
 
   onClickSave (e) {
     e.preventDefault();
-    console.log(`Saving ... ${this.state.course.title}`);
+    this.props.createCourse(this.state.course);
+  }
+
+  displayAddedCourses (course, i) {
+
   }
 
   render () {
+    let addedCourses = this.props.courses.map( (m,i) => {
+      return <li key={i}>{m.title}</li>;
+    });
+
     return (
       <div>
         <h1>Courses Page</h1>
@@ -41,9 +52,24 @@ class CoursesPage extends Component {
         <input type="submit"
               value="Save"
               onClick={this.onClickSave} />
+
+        <h3>Added Courses:-</h3>
+        <ol>{addedCourses}</ol>
       </div>
     );
   }
 }
 
-export default CoursesPage;
+function mapStateToProps (state, ownProps) {
+  return {
+    courses: state.courses
+  };
+}
+
+function mapDispatchStateToProps (dispatch) {
+  return {
+    createCourse: course => dispatch(courseActions.createCourse(course))
+  };
+}
+
+export default connect (mapStateToProps, mapDispatchStateToProps) (CoursesPage);
