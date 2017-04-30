@@ -12,11 +12,14 @@ import HomePage from './components/home/HomePage';
 import AboutPage from './components/about/AboutPage';
 import CoursesPage from './components/courses/CoursesPage';
 
+import { loadCourses } from './actions/courseActions';
+
 import './styles/styles.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 
 const store = configureStore(); //create store call
+store.dispatch(loadCourses());
 
 render(
   <Provider store={store}>
