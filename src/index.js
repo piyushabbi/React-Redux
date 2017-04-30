@@ -1,1 +1,2 @@
-console.log('Hi!!');
+/* eslint-disable no-console */
+console.log('hi');
